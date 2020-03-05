@@ -1,0 +1,10 @@
+news/*
+*.pyc
+__pycache__/*
+.cache/*
+.coverage
+venv/*
+.mypy_cache/*
+news_env/*
+.idea/
+.idea
