@@ -5,7 +5,7 @@ from flask_restful import Resource, Api
 class BookAPI(Resource):
 
     def get(self):
-        from app.models.book import Book
+        from app.models.timelog import Book
 
         books = Book.objects()
 
