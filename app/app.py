@@ -2,15 +2,24 @@ from flask import Flask
 from flask_restful import Resource, Api
 
 
-class BookAPI(Resource):
+class TimelogAPI(Resource):
 
-    def get(self):
-        from app.models.timelog import Book
+    def get(self, employee=None):
+        from app.models.timelog import Timelog
 
-        books = Book.objects()
+        if not employee:
+
+            tls = Timelog.objects()
+
+        else:
+
+            tls = Timelog.objects(employee=employee)
+
+        return [tl.time.strftime("%d/%m/%Y") for tl in tls]
 
 
 def create_flask_app():
+    from app import db
 
     flask_app = Flask(__name__)
 
@@ -20,7 +29,6 @@ def create_flask_app():
 
     api = Api(flask_app)
 
-    api.add_resource(BookAPI, '/books')
-    api.add_resource(LogsAPI, '/logs')
+    api.add_resource(TimelogAPI, '/timelog', '/timelog/<string:employee>')
 
     return flask_app
